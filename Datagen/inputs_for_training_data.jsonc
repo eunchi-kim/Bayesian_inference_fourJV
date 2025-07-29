@@ -1,0 +1,115 @@
+{
+  "name": "test_gen",  // file name for all files
+  "fl_cas": "OSC",  // name of the cas file
+  "fl_template": "asa_run_OSC.template",  // name of the template file
+  "gen_folder_template": "datagen_template",  // name of the folder with the template routine
+   
+  // parameters for voltage sweep in the IV curve
+  "vstart": 0,
+  "vend": 0.84, // above Voc of highest light intensity
+  "vstep": 0.02,
+  "vbias": 1.0, // voltage for evaluation of bands
+
+  "temperature": 293.15, // 20°C lab temperature
+  "suns":1, 
+
+  "t": "layer thicknesses",
+  "t_abs1": 83e-9,         // measured with Profilometer, taken from 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\Data\SortedByPH\Dicke_Proben_BU.xlsx'
+  
+  "pr": "Permittivity",
+  "pr_abs1": 3.07,        // calculated with MS measurements, taken from 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\expDataAnalysis\20221121_1_findEps\results\21Nov2022_140740_eps.mat'
+  
+
+  "eg": "bandgap",
+  "eg_abs1": 1.3,       // taken from master thesis of Barbara Urbano, Fig. A6
+  
+  "nc": "Effective density of states of conduction band",
+  "nc_abs1": 1.0e25,
+  
+  "nv": "Effective density of states of valence band",
+  "nv_abs1": 1.0e25,
+  
+  "nd": "Donor doping density",
+  "nd_abs1": 0e18,
+  
+  "na": "Acceptor doping density",
+  "na_abs1": 0e18,
+ 
+  "mue": "electron mobility",
+  "mue_abs1": 5e-8,
+  
+  "muh": "hole mobility",
+  "muh_abs1": 5e-8,
+ 
+  "kr": "direct recombination coefficient",
+  "kr_abs1": 5e-17,
+ 
+  "S": "Surface recombination velocity",      // assume negligible surface recombination, since J0~d increases (Master thesis Barbara Urbano)
+  "Scat": 1e-7,   
+  "San": 1e-7,
+
+  "polarity": "polarity of the deep defect",
+  "pol": 0,     // donor-like traps, since local maximum at thick layer is still present in the characteristic parameters vs thickness plots(Kirchartz et al (DOI: 10.1021/jz301639y) and master thesis Barbara Urbano)
+  
+  "edb": "energy dangling bonds",
+  "edb_abs1": -0.65,     // Eg/2
+  
+  "de": "width of density of dangling bond states",
+  "de_abs1": 0.1,
+  
+  "dosdb": "density of dangling bond states",
+  "dosdb_abs1": 1e21,
+
+  "betadb": "rate constants dangling bonds",
+  "beta1db_abs1": 1e-15,
+  "beta2db_abs1": 1e-15,
+  "beta3db_abs1": 1e-15,
+  "beta4db_abs1": 1e-15,
+
+  "dostailCBT": "density of conduction band tail states",
+  "dostailCBT_abs1": 1e25,
+
+  "dostailVBT": "density of valence band tail states",
+  "dostailVBT_abs1": 1e25,
+
+  "EUCBT": "Urbach energy conduction band tails",
+  "EUCBT_abs1": 0.023,        // estimated from binary material from FTPS measurements (my Urbach Energy paper)
+  
+  "EUVBT": "Urbach energy valence band tails",
+  "EUVBT_abs1": 0.023, 
+
+  "betaCBT": "rate constants conduction band tails",
+  "beta1CBT_abs1": 5e-17,
+  "beta2CBT_abs1": 1e-14,
+  
+  "betaVBT": "rate constants valence band tails",
+  "beta1VBT_abs1": 1e-14,
+  "beta2VBT_abs1": 5e-17,
+  
+  "phi": "injection barriers",
+  "phibf": 0.26,
+  "phibb": 0.57,
+
+  "genrate": "gen_B23n8-3_0OD_27mA",  // generation rate file name  taken from 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\Simulations\20221124_1_genrates\results'
+
+  "rseries": 0,
+  "rpar": 1e20,        // for ASA, will be added afterward as nonlinear shunt current
+  //"expRp": 1.052,          // exponent for nonlinear shunt, extracted from dark JV curve in 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\expDataAnalysis\20221123_4_NonlinearRp_lowV\results\25Nov2022_101623_workspace.mat'
+  //"preRp": 0.0213,          // prefactor for nonlinear shunt, extracted from dark JV curve in 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\expDataAnalysis\20221123_4_NonlinearRp_lowV\results\25Nov2022_101623_workspace.mat'
+
+  
+  // define parameter that is varied in the experiments
+  "experiment_type": "genrate",   // this must be the name of the variable which should be changed
+  "experiments": ["gen_B23n8-3_0OD_27mA.gen","gen_B23n8-3_0OD_63mA.gen","gen_B23n8-3_0OD_149mA.gen","gen_B23n8-3_0OD_365mA.gen"],  // taken from 'C:\Users\p.hartnagel\sciebo\PaulaPBox\Promotion\BayesianInference_MABU\Simulations\20221124_1_genrates\results'
+
+  // define parameters that are varied in the training data
+  "var_param": [  "phibf", "phibb", "eg_abs1", "suns", "mue_abs1", "muh_abs1", "dosdb_abs1", "kr_abs1"],
+  // choose the parameter range a little larger than what you actual think to make sure the walkers don't run into boundary
+  "lb": [ 0, 0, 1.2,0.6, 1e-8, 1e-8, 1e20, 1e-18], // lower boundary for parameters
+  "ub": [ 0.4, 0.4, 1.43,1, 1e-4, 1e-4, 1e23, 1e-12 ], // upper boundary for parameters
+  "seq": 210000  // number of training simulations,
+
+}
+
+
+
