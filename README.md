@@ -1,4 +1,4 @@
-# Bayesian parameter estimation in organic solar cells
+# Bayesian inference of material parameters in organic solar cells
 
 ![Graphical abstract](graphical%20abstract.png)
 
