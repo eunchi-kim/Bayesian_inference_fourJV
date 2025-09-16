@@ -1,6 +1,6 @@
 # Parameter estimation from current-voltage curves 
 
-![Graphical abstract](graphical abstract.png)
+![Graphical abstract](graphical%20abstract.png)
 
 This repository contains code for parameter estimation from current-voltage curves with a NN-based surrogate model.
 
