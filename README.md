@@ -2,7 +2,7 @@
 
 ![Graphical abstract](graphical%20abstract.png)
 
-This repository contains code for Bayesian parameter estimation from current-voltage curves with a NN-based surrogate model.
+This repository contains code for Bayesian inference of material parameters from _JV_ curves in organic solar cells.
 
 > **Note:**  
 > Due to licensing issues for the drift-diffusion simulator, the corresponding code is omitted.
