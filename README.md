@@ -9,6 +9,7 @@ This repository contains code for Bayesian inference of material parameters from
 
 For details, see the main paper  	
 https://doi.org/10.48550/arXiv.2506.13308: 
+https://doi.org/10.1002/solr.202500648:
 
 ---
 
